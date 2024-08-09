@@ -1,18 +1,21 @@
 class Solution {
     public int maxOperations(int[] nums, int k) {
-        HashMap<Integer, Integer> hashtable = new HashMap<>();
         int ans = 0;
-        
-        for(int num: nums){
-            int target = k - num;
-            if(hashtable.getOrDefault(target, 0) > 0) {
+        Arrays.sort(nums);
+
+        int start = 0;
+        int end = nums.length - 1;
+
+        while(start < end){
+            int sum = nums[start] + nums[end];
+            if(sum == k) {
                 ans++;
-                hashtable.put(target, hashtable.get(target) - 1);
-            } else {
-                hashtable.put(num, hashtable.getOrDefault(num, 0) + 1);
+                start++;
+                end--;
             }
-        }
-        
+            else if(sum > k) end--;
+            else start++; 
+        }        
         return ans;
     }
 }

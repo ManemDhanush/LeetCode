@@ -8,12 +8,8 @@ class Solution {
         }
 
         for(int i=0; i<nums.length; i++){
-            if(i==0){
-                leftSum = 0;
-            } else {
-                leftSum += nums[i-1];
-            }
             if(leftSum == totalSum - nums[i] - leftSum) return i;
+            leftSum+= nums[i];
         }
 
         return -1;

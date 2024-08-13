@@ -6,9 +6,8 @@ class Solution {
             map.put(n, map.getOrDefault(n, 0) + 1);
         }
 
-        List<Integer> list = new ArrayList<Integer>(map.values());
         Set<Integer> set = new HashSet<Integer>(map.values());
 
-        return list.size() == set.size();
+        return map.size() == set.size();
     }
 }

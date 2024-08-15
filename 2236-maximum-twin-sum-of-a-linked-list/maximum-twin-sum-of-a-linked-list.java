@@ -15,17 +15,26 @@ class Solution {
         ListNode slow = head;
         int max = Integer.MIN_VALUE;
 
-        Stack<Integer> stack = new Stack<>();
-
         while(fast != null && fast.next != null){
             fast = fast.next.next;
-            stack.add(slow.val);
             slow = slow.next;
         }
 
+        fast = slow.next;
+        ListNode prevFast = fast;
+        slow.next = null;
+
+        while(fast != null){
+            fast = fast.next;
+            prevFast.next = slow;
+            slow = prevFast;
+            prevFast = fast;
+        }
+
         while(slow != null){
-            max = Math.max(slow.val + stack.pop(), max);
+            max = Math.max(slow.val + head.val, max);
             slow = slow.next;
+            head = head.next;
         }
 
         return max;

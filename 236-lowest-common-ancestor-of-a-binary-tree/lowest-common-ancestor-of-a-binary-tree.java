@@ -16,24 +16,18 @@ class Solution {
         path.add(n);
         if(n.val == p.val) pPath = new ArrayList<TreeNode>(path);
         if(n.val == q.val) qPath = new ArrayList<TreeNode>(path);
-
-        // System.out.println(pPath.stream().map(z -> z.val).collect(Collectors.toList()));
-        // System.out.println(qPath.stream().map(z -> z.val).collect(Collectors.toList()));
         dfs(n.left, p, q);
         dfs(n.right, p, q);
         path.remove(n);
     }
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        // return root;
         dfs(root, p, q);
-        // System.out.println(pPath.stream().map(z -> z.val).collect(Collectors.toList()));
-        // System.out.println(qPath.stream().map(z -> z.val).collect(Collectors.toList()));
         int size = pPath.size() > qPath.size() ? qPath.size() : pPath.size();
-
-        for(int i = 0; i < size; i++){
-            if(pPath.get(i) != qPath.get(i)) return pPath.get(i-1);
+        int i = 0;
+        for(i = 0; i < size; i++){
+            if(pPath.get(i) != qPath.get(i)) break;
         }
 
-        return pPath.get(size - 1);
+        return pPath.get(i - 1);
     }
 }

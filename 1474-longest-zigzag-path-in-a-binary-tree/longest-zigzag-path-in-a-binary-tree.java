@@ -24,14 +24,6 @@ class Solution {
             dfs(n.left, max + 1, count, true, false);
             dfs(n.right, 1, count, false, true);
         }
-
-        // if (isLeft) {
-        //     dfs(node.right, length + 1, maxLength, false);
-        //     dfs(node.left, 1, maxLength, true);
-        // } else {
-        //     dfs(node.left, length + 1, maxLength, true);
-        //     dfs(node.right, 1, maxLength, false);
-        // }
     }
     public int longestZigZag(TreeNode root) {
         int[] count = new int[1];

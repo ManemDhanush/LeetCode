@@ -12,7 +12,7 @@ class Solution {
     List<TreeNode> qPath = new ArrayList<TreeNode>();
     List<TreeNode> path = new ArrayList<TreeNode>();
     public void dfs(TreeNode n, TreeNode p, TreeNode q){
-        if(n == null) return;
+        if(n == null || (!pPath.isEmpty() && !qPath.isEmpty())) return;
         path.add(n);
         if(n.val == p.val) pPath = new ArrayList<TreeNode>(path);
         if(n.val == q.val) qPath = new ArrayList<TreeNode>(path);

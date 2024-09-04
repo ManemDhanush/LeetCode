@@ -15,12 +15,14 @@ class Solution {
         for(int command: commands){
             if(command == -1){
                 // turn right
-                dir = (dir + 1) % 4;
+                // dir = (dir + 1) % 4;
+                dir++;
             } else if(command == -2){
                 // turn left
-                dir = (dir + 3) % 4;
+                // dir = (dir + 3) % 4;
+                dir+=3;
             } else {
-                int[] newCoords = directions[dir];
+                int[] newCoords = directions[dir%4];
                 while(command-- > 0){
                     int x = coords[0] + newCoords[0];
                     int y = coords[1] + newCoords[1];

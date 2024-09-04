@@ -29,6 +29,8 @@ class Solution {
                     if(!obs.contains(new Pair<>(x,y))){
                         coords[0] = x;
                         coords[1] = y;
+                    } else {
+                        break;
                     }
                 }
                 // switch(Math.abs(dir) % 4){

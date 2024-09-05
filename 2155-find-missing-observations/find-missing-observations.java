@@ -5,7 +5,6 @@ class Solution {
 
         double avg = ((mean * (rolls.length + n)) - sum) * 1.0 / n;
         int mod = ((mean * (rolls.length + n)) - sum) % n;
-        // System.out.println(avg);
         if(avg > 6 || avg < 1) return new int[0];
 
         int[] ans = new int[n];

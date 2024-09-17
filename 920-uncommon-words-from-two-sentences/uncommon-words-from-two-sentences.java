@@ -15,6 +15,6 @@ class Solution {
                 ans.add(s);
             }
         }
-        return ans.toArray(new String[0]);
+        return ans.stream().toArray(String[]::new);
     }
 }

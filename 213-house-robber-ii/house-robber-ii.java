@@ -1,6 +1,5 @@
 class Solution {
     public int rob(int[] nums) {
-        int robs[] = new int [nums.length + 1];
         int len = nums.length;
         if(len == 1) return nums[0];
         if(len == 2) return Math.max(nums[0], nums[1]);

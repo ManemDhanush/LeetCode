@@ -1,25 +1,17 @@
 class Solution {
     public int rob(int[] nums) {
-        // int oddSum = 0;
-        // int evenSum = 0;
-
-        // for(int i=0; i<nums.length; i++){
-        //     if(i%2==0) evenSum += nums[i];
-        //     else oddSum += nums[i];
-        // }
-
-        if(nums.length == 1) return nums[0];
-        if(nums.length == 2) return Math.max(nums[0], nums[1]);
-
-        int[] dp = new int [nums.length];
-        dp[0] = nums[0];
-        dp[1] = nums[1];
-        dp[2] = nums[0] + nums[2];
-
-        for(int i = 3; i< nums.length; i++){
-            dp[i] = Math.max(dp[i-2] + nums[i], dp[i-3] + nums[i]);
+        if(nums.length < 3) {
+            if(nums.length < 2) return nums[0];
+            return Math.max(nums[0], nums[1]);
         }
-        // System.out.println(Arrays.toString(dp));
-        return Math.max(dp[dp.length - 1], dp[dp.length - 2]);
+        int robs[] = new int[nums.length];
+        robs[0] = nums[0];
+        robs[1] = nums[1];
+        robs[2] = nums[2] + robs[0];
+        for(int i=3; i<nums.length; i++){
+            robs[i] = nums[i] + Math.max(robs[i-2], robs[i-3]);
+        }
+        // System.out.println(Arrays.toString(robs));
+        return Math.max(robs[nums.length -1], robs[nums.length - 2]);
     }
 }

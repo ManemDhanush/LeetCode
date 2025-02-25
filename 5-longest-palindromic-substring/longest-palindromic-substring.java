@@ -20,15 +20,11 @@ class Solution {
     }
 
     public String palindrome(int start, int end, String s, int maxLength) {
-        // System.out.println("Index = " + start);
         while(start >= 0 && end < s.length() && s.charAt(start) == s.charAt(end)){
             start--;
             end++;
         }
-        // System.out.println("start = " + start + " End = " + end);
-        // System.out.println(end);
-        // System.out.println(start);
-        if(end - start - 1 > maxLength) {
+        if(end - start + 1 > maxLength) {
             return s.substring(start + 1, end);
         }
         return "";

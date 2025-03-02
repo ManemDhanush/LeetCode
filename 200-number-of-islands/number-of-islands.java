@@ -17,15 +17,10 @@ class Solution {
     }
     public void dfs(char[][] grid, boolean[][] visited, int i, int j) {
 
-        if(i>grid.length - 1 || j>grid[0].length -1 || i<0 || j<0){
+        if(i>grid.length - 1 || j>grid[0].length -1 || i<0 || j<0 || visited[i][j] || grid[i][j] == '0'){
             return;
         }
-        if(visited[i][j]) return;
-        if(grid[i][j] == '1' && !visited[i][j]){
-            visited[i][j] = true;
-        } else {
-            return;
-        }
+        visited[i][j] = true;
         dfs(grid, visited, i,j+1);
         dfs(grid, visited, i+1,j);
         dfs(grid, visited, i-1, j);

@@ -15,24 +15,10 @@ class Solution {
             visit(heights, atlantic, heights[heights.length - 1][j], heights.length - 1, j);
         }
 
-        // for(boolean[] d: pacific){
-        //     System.out.println(Arrays.toString(d));
-        // }
-
-
-        // for(int i=0; i<heights.length; i++) {
-        //     for(int j=0; j<heights[0].length; j++){
-        //         dfs(heigths, reach, i,j);
-        //     }
-        // }
-
         for(int i=0; i<heights.length; i++) {
             for(int j=0; j<heights[0].length; j++){
                 if(pacific[i][j] && atlantic[i][j]) {
-                    ArrayList<Integer> l = new ArrayList<Integer>();
-                    l.add(i);
-                    l.add(j);
-                    ans.add(l);
+                    ans.add(Arrays.asList(i,j));
                 }
             }
         }
@@ -52,19 +38,4 @@ class Solution {
         visit(heights, ocean, heights[i][j], i, j-1);
 
     }
-
-    // void dfs(int[][] heigths, int[]][] reach, int i, int j) {
-    //     // 1 means pacific
-    //     if(i<0) reach[i][j] += 1;
-    //     // 2 means atlantic
-    //     if(j>heigths[0].length) reach[i][j] += 2;
-
-    //     if(i<0 || j<0 || i > heigths.length || j > heights[0].length) return;
-    //     if(heigths[i][j] < reach[i][j]) return;
-
-    //     dfs(heigths, reach, i+1,j);
-    //     dfs(heigths, reach, i,j+1);
-    //     dfs(heigths, reach, i-1,j);
-    //     dfs(heigths, reach, i,j-1);
-    // }
 }

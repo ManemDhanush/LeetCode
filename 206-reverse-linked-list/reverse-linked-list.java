@@ -12,19 +12,17 @@ class Solution {
     public ListNode reverseList(ListNode head) {
         if(head == null || head.next == null) return head;
 
-        ListNode l1 = head;
-        ListNode l2 = head.next;
-        ListNode l3 = head.next;
-        l1.next = null;
 
-        while(l3 != null){
-            // System.out.println(l3.val);
-            l3 = l3.next;
-            l2.next = l1;
-            l1 = l2;
-            l2 = l3;
+        ListNode next = head.next;
+        head.next = null;
+
+        while(next != null){
+            ListNode temp = next.next;
+            next.next = head;
+            head = next;
+            next = temp;
         }
 
-        return l1;
+        return head;
     }
 }

@@ -14,16 +14,16 @@
  * }
  */
 class Solution {
-
-    public void dfs(TreeNode n, int[] count, int max) {
-        if(max <= n.val) count[0]++;
-        if(n.left != null) dfs(n.left, count, Math.max(n.val, max));
-        if(n.right != null) dfs(n.right, count, Math.max(n.val, max));
-    }
+    int ans = 0;
     public int goodNodes(TreeNode root) {
-        int[] ans = new int[1];
-        ans[0] = 0;
-        dfs(root, ans, Integer.MIN_VALUE);
-        return ans[0];
+        dfs(root, Integer.MIN_VALUE);
+        return ans;
+    }
+
+    public void dfs(TreeNode root, int max) {
+        if(root == null) return;
+        if(root.val >= max) ans++;
+        dfs(root.left, Math.max(max, root.val));
+        dfs(root.right, Math.max(max, root.val));
     }
 }

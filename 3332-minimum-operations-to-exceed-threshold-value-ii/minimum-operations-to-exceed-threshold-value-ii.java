@@ -9,10 +9,9 @@ class Solution {
 
         for(int i=0; i<nums.length; i++){
             if(pq.peek() >= k) return i;
-            // System.out.println(pq);
             long x = pq.poll();
             long y = pq.poll();
-            pq.add((Math.min(x,y) * 2) + Math.max(x,y));
+            pq.add(x * 2 + y);
         }
         return nums.length;
     }

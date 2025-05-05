@@ -8,13 +8,14 @@ class Solution {
             int max = Math.max(d[0], d[1]);
 
             map.put(min+"+"+max, map.getOrDefault(min+"+"+max, 0) + 1);
+            if(map.get(min+"+"+max) > 1) ans+=map.get(min+"+"+max)-1;
         }
 
-        for(int x: map.values()){
-            if(x>1){
-                ans+=((x)*(x-1)/2);
-            }
-        }
+        // for(int x: map.values()){
+        //     if(x>1){
+        //         ans+=((x)*(x-1)/2);
+        //     }
+        // }
         return ans;
     }
 }

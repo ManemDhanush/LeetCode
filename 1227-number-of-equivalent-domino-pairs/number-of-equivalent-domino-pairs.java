@@ -1,21 +1,16 @@
 class Solution {
     public int numEquivDominoPairs(int[][] dominoes) {
-        HashMap<String, Integer> map = new HashMap<>();
+        HashMap<Integer, Integer> map = new HashMap<>();
         int ans = 0;
 
         for(int[] d: dominoes){
             int min = Math.min(d[0], d[1]);
             int max = Math.max(d[0], d[1]);
+            int encode = max*10+min;
 
-            map.put(min+"+"+max, map.getOrDefault(min+"+"+max, 0) + 1);
-            if(map.get(min+"+"+max) > 1) ans+=map.get(min+"+"+max)-1;
+            map.put(encode, map.getOrDefault(encode, 0) + 1);
+            if(map.get(encode) > 1) ans+=map.get(encode)-1;
         }
-
-        // for(int x: map.values()){
-        //     if(x>1){
-        //         ans+=((x)*(x-1)/2);
-        //     }
-        // }
         return ans;
     }
 }

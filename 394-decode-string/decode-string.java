@@ -40,6 +40,11 @@ class Solution {
                 }
             }
         }
-        return String.join("", charStk.stream().map(x->x.toString()).toList());
+        StringBuffer sss = new StringBuffer();
+        for(char c: charStk){
+            sss.append(c);
+        }
+        return sss.toString();
+        // return String.join("", charStk.stream().map(x->x.toString()).toList());
     }
 }

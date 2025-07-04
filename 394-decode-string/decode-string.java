@@ -1,41 +1,45 @@
 class Solution {
     public String decodeString(String s) {
 
+        Stack<Character> charStk = new Stack<>();
+        Stack<Integer> intStk = new Stack<>();
+        int num = 0;
 
-        Stack<Character> stack = new Stack<>();
-        StringBuilder str = new StringBuilder();
-        StringBuilder num = new StringBuilder();
-
-        for(char ch: s.toCharArray()){
-            if(ch == ']'){
-                // String str = "";
-                while(!stack.isEmpty() && stack.peek() != '['){
-                    // str = stack.pop() + str;
-                    str.insert(0,stack.pop());
-                }
-                stack.pop();
-                // String num = "";
-                while(!stack.isEmpty() && Character.isDigit(stack.peek())){
-                    // num = stack.pop() + num;
-                    num.insert(0,stack.pop());
-                }
-
-                // System.out.println(str);
-                // System.out.println(num);
-
-                for(int i=0; i<Integer.parseInt(num.toString()); i++){
-                    for(char c: str.toString().toCharArray()){
-                        stack.push(c);
-                    }
-                }
-
-                num.setLength(0);
-                str.setLength(0);
+        for(char c: s.toCharArray()){
+            if(Character.isDigit(c)){
+                num = num*10 + Character.getNumericValue(c);
             } else {
-                stack.push(ch);
+                if(num != 0){
+                    intStk.push(num);
+                    num = 0;
+                }
+
+                if(c == ']'){
+                    StringBuffer sb = new StringBuffer();
+                    while(!charStk.isEmpty() && charStk.peek() != '[' ){
+                        sb.append(charStk.pop());
+                    }
+                    if(!charStk.isEmpty()){
+                        charStk.pop();
+                    }
+                    int num1 = 1;
+                    if(!intStk.isEmpty()){
+                        num1 = intStk.pop();
+                    }
+                    String str = sb.reverse().toString();
+
+                    for(int i=0; i<num1; i++){
+                        for(int j=0; j<str.length(); j++){
+                            charStk.push(str.charAt(j));
+                        }
+                    }
+
+                    // System.out.println(charStk);
+                } else {
+                    charStk.push(c);
+                }
             }
         }
-        // System.out.println(stack);
-        return stack.stream().map(String::valueOf).collect(Collectors.joining(""));
+        return String.join("", charStk.stream().map(x->x.toString()).toList());
     }
 }

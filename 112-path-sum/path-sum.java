@@ -14,20 +14,15 @@
  * }
  */
 class Solution {
-    boolean hasAns = false;
     public boolean hasPathSum(TreeNode root, int targetSum) {
-        search(root, 0, targetSum);
-        return hasAns;
+        return search(root, 0, targetSum);
     }
 
-    void search(TreeNode root, int sum, int targetSum){
-        if(hasAns) return;
-        if(root == null) return;
+    boolean search(TreeNode root, int sum, int targetSum){
+        if(root == null) return false;
         if(sum + root.val == targetSum && root.left == root.right){
-            hasAns = true;
-            return;
+            return true;
         }
-        search(root.left, sum + root.val, targetSum);
-        search(root.right, sum + root.val, targetSum);
+        return search(root.left, sum + root.val, targetSum) || search(root.right, sum + root.val, targetSum);
     }
 }

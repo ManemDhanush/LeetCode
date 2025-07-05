@@ -25,10 +25,11 @@ class Solution {
         sum += node.val;
         list.add(node.val);
         if(sum == targetSum && node.left == node.right){
-            ans.add(list);
-            return;
+            ans.add(new ArrayList(list));
+        } else {
+            search(node.left, sum, targetSum, list, ans);
+            search(node.right, sum, targetSum, list, ans);
         }
-        search(node.left, sum, targetSum, new ArrayList(list), ans);
-        search(node.right, sum, targetSum, new ArrayList(list), ans);
+        list.remove(list.size() -1);
     }
 }

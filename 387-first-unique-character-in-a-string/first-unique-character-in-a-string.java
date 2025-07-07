@@ -12,12 +12,11 @@ class Solution {
     public int firstUniqChar(String s) {
         HashMap<Character, Pair> map = new HashMap<>();
         for(int i=0; i<s.length(); i++){
+            char c = s.charAt(i);
             if(map.containsKey(s.charAt(i))){
-                Pair p = map.get(s.charAt(i));
-                p.increment();
-                map.put(s.charAt(i), p);
+                map.get(c).increment();
             } else {
-                map.put(s.charAt(i), new Pair(i,1));
+                map.put(c, new Pair(i,1));
             }
         }
 

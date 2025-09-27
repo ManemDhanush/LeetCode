@@ -1,64 +1,69 @@
 class LRUCache {
-    class DoublyLL{
-        int key;
-        int val;
-        DoublyLL next, prev;
 
-        DoublyLL(int key, int val){
+    class DoublyLL {
+        int key;
+        int value;
+        DoublyLL next, prev;
+        DoublyLL(int key, int value){
             this.key = key;
-            this.val = val;
+            this.value = value;
         }
     }
 
-    Deque<Integer> q;
-    HashMap<Integer, DoublyLL> map;
-    int capacity;
     DoublyLL head;
     DoublyLL tail;
-
-    public LRUCache(int capacity) {
-        this.capacity = capacity;
-        map = new HashMap<>();
-        head = new DoublyLL(-1,-1);
-        tail = new DoublyLL(-1,-1);
-        head.next = tail;
-        tail.prev = head;
-    }
-    
-    public int get(int key) {
-        if(map.containsKey(key)){
-            DoublyLL node = map.get(key);
-            remove(node);
-            add(node);
-            return node.val;
-        } else return -1;
-    }
-    
-    public void put(int key, int value) {
-        if (map.containsKey(key)) {
-            remove(map.get(key));
-        }
-        DoublyLL node = new DoublyLL(key, value);
-        map.put(key, node);
-        add(node);
-
-        if(map.size() > capacity){
-            map.remove(head.next.key);
-            remove(head.next);
-        }
-    }
+    HashMap<Integer, DoublyLL> map;
+    int capacity;
 
     void add(DoublyLL node){
-        DoublyLL prev = tail.prev;
-        prev.next = node;
-        node.prev = prev;
+        node.prev = tail.prev;
         node.next = tail;
+        tail.prev.next = node;
         tail.prev = node;
     }
 
     void remove(DoublyLL node){
         node.prev.next = node.next;
         node.next.prev = node.prev;
+        node.prev = null;
+        node.next = null;
+    }
+
+    public LRUCache(int capacity) {
+        map = new HashMap<>();
+        this.capacity = capacity;
+        head = new DoublyLL(-1, -1);
+        tail = new DoublyLL(-1, -1);
+        head.next = tail;
+        tail.prev = head;
+    }
+    
+    public int get(int key) {
+        DoublyLL x = map.getOrDefault(key, null);
+        if(x==null) return -1;
+        remove(x);
+        add(x);
+        return x.value;
+    }
+    
+    public void put(int key, int value) {
+        DoublyLL x = map.get(key);
+        if (x != null) {
+            x.value = value;
+            remove(x);
+            add(x);
+            return;
+        }
+
+        DoublyLL fresh = new DoublyLL(key, value);
+        add(fresh);
+        map.put(key, fresh);
+
+        if (map.size() > capacity) {
+            DoublyLL lru = head.next;
+            remove(lru);
+            map.remove(lru.key);
+        }
     }
 }
 

@@ -1,32 +1,30 @@
 class Solution {
     public String longestPalindrome(String s) {
-        // char[] sChar = s.toCharArray();
-        int maxLength = 0;
-        String ans = "";
-        for(int i=0; i<s.length(); i++){
-            String temp1 = palindrome(i,i, s, maxLength);
-            String temp2 = palindrome(i,i+1, s, maxLength);
-            if(temp1.length() > maxLength){
-                ans = temp1;
-                maxLength = ans.length();
+        int[] ans = new int[]{0,0};
+        for(int i=0;i<s.length(); i++){
+            int odd = isPalindrome(i, i, s);
+            if (odd > ans[1] - ans[0] + 1) {
+                int dist = odd / 2;
+                ans[0] = i - dist;
+                ans[1] = i + dist;
             }
-            if(temp2.length() > maxLength){
-                ans = temp2;
-                maxLength = ans.length();
+
+            int even = isPalindrome(i, i + 1, s);
+            if (even > ans[1] - ans[0] + 1) {
+                int dist = (even / 2) - 1;
+                ans[0] = i - dist;
+                ans[1] = i + 1 + dist;
             }
         }
-        return ans;
 
+        return s.substring(ans[0], ans[1]+1);
     }
 
-    public String palindrome(int start, int end, String s, int maxLength) {
-        while(start >= 0 && end < s.length() && s.charAt(start) == s.charAt(end)){
-            start--;
-            end++;
+    public int isPalindrome(int i, int j, String s){
+        while(i>=0 && j<s.length() && s.charAt(i) == s.charAt(j)){
+            i--;
+            j++;
         }
-        if(end - start + 1 > maxLength) {
-            return s.substring(start + 1, end);
-        }
-        return "";
+        return j - i - 1;
     }
 }

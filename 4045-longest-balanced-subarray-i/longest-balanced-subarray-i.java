@@ -1,0 +1,20 @@
+class Solution {
+    public int longestBalanced(int[] nums) {
+        int len = 0;
+        for(int i = 0; i < nums.length; i++){
+            HashSet<Integer> odd = new HashSet<>();
+            HashSet<Integer> even = new HashSet<>();
+            for(int j = i; j<nums.length; j++){
+                if(nums[j] % 2 == 1){
+                    odd.add(nums[j]);
+                } else {
+                    even.add(nums[j]);
+                }
+                if (odd.size() == even.size()) {
+                    len = Math.max(len, j - i + 1);
+                }
+            }
+        }
+        return len;
+    }
+}

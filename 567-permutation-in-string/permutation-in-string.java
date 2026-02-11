@@ -20,8 +20,6 @@ class Solution {
     }
 
     public boolean check(int[] a1, int[] a2){
-        System.out.println(Arrays.toString(a1));
-        System.out.println(Arrays.toString(a2));
         for(int i=0; i<26; i++){
             if(a1[i] != a2[i]){
                 return false;

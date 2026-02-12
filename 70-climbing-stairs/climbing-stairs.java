@@ -1,14 +1,20 @@
 class Solution {
+    int count = 0;
     public int climbStairs(int n) {
-        if(n < 4){
-            return n;
+        int memo[] = new int[n + 1];
+        return choose(0, n, memo);
+    }
+
+    public int choose(int currSum, int n, int[] memo){
+        if(currSum == n){
+            return 1;
+        } else if(currSum > n) {
+            return 0;
         }
-        int[] ans = new int[n];
-        ans[0] = 1;
-        ans[1] = 2;
-        for(int i = 2; i< n; i++){
-            ans[i] = ans[i-1] + ans [i-2];
+        if (memo[currSum] > 0) {
+            return memo[currSum];
         }
-        return ans[n-1];
+        memo[currSum] = choose(currSum + 1, n, memo) + choose(currSum + 2, n, memo);
+        return memo[currSum];
     }
 }
